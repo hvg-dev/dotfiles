@@ -1,22 +1,27 @@
 Switch([System.Diagnostics.Process]::GetCurrentProcess().ProcessName) {
     'pwsh' {
+        if (!(Get-Module -ListAvailable -Name posh-git))
+        {
+            Install-Module posh-git -Scope CurrentUser -Force
+        }
+        Import-Module posh-git
         if (!(Get-Module -ListAvailable -Name PSReadLine))
         {
-            Install-Module PSReadLine -Scope CurrentUser
+            Install-Module PSReadLine -MinimumVersion 2.2.0 -Scope CurrentUser -Force
         }
         Import-Module PSReadLine
         if (!(Get-Module -ListAvailable -Name CompletionPredictor))
         {
-            Install-Module CompletionPredictor -Scope CurrentUser
+            Install-Module CompletionPredictor -Scope CurrentUser -Force
         }
         Import-Module CompletionPredictor
-        Set-PSReadLineOption -PredictionSource History
+        Set-PSReadLineOption -PredictionSource HistoryAndPlugin
         Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
     }
     'powershell' {
         if (!(Get-Module -ListAvailable -Name posh-git))
         {
-            Install-Module posh-git -Scope CurrentUser
+            Install-Module posh-git -Scope CurrentUser -Force
         }
         Import-Module posh-git
     }
@@ -27,19 +32,19 @@ Switch([System.Diagnostics.Process]::GetCurrentProcess().ProcessName) {
 
 if (!(Get-Module -ListAvailable -Name posh-docker))
 {
-    Install-Module posh-docker -Scope CurrentUser
+    Install-Module posh-docker -Scope CurrentUser -Force
 }
 Import-Module posh-docker
 
 if (!(Get-Module -ListAvailable -Name dockerComposeCompletion))
 {
-    Install-Module dockerComposeCompletion -Scope CurrentUser
+    Install-Module dockerComposeCompletion -Scope CurrentUser -Force
 }
 Import-Module dockerComposeCompletion
 
 if (!(Get-Module -ListAvailable -Name yarn-completion))
 {
-    Install-Module yarn-completion -Scope CurrentUser
+    Install-Module yarn-completion -Scope CurrentUser -Force
 }
 Import-Module yarn-completion
 
