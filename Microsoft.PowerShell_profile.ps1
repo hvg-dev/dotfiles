@@ -1,3 +1,5 @@
+$dotfiles = "$ENV:USERPROFILE\.dotfiles"
+
 Switch([System.Diagnostics.Process]::GetCurrentProcess().ProcessName) {
     'pwsh' {
         if (!(Get-Module -ListAvailable -Name posh-git))
@@ -30,29 +32,13 @@ Switch([System.Diagnostics.Process]::GetCurrentProcess().ProcessName) {
     }
 }
 
-if (!(Get-Module -ListAvailable -Name posh-docker))
+if (!(Get-Module -ListAvailable -Name devtoolbox))
 {
-    Install-Module posh-docker -Scope CurrentUser -Force
+    Install-Module devtoolbox -Scope CurrentUser -Force
 }
-Import-Module posh-docker
+Import-Module devtoolbox
 
-if (!(Get-Module -ListAvailable -Name dockerComposeCompletion))
-{
-    Install-Module dockerComposeCompletion -Scope CurrentUser -Force
-}
-Import-Module dockerComposeCompletion
-
-if (!(Get-Module -ListAvailable -Name yarn-completion))
-{
-    Install-Module yarn-completion -Scope CurrentUser -Force
-}
-Import-Module yarn-completion
-
-Set-Alias -Name g -Value git
-
-Set-Alias -Name d -Value docker
-
-Set-Alias -Name dc -Value docker-compose
+. "$dotfiles\completion.ps1"
 
 Function Open-Admin-Terminal
 {
