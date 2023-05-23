@@ -14,6 +14,8 @@ if(!($null -eq $Boxstarter)){
     #if (Test-PendingReboot) { throw [System.Exception] "Windows restart required!" }
 }
 
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
 # Basic setup
 #Update-ExecutionPolicy Unrestricted;
 #Install chocolatey: https://chocolatey.org/install
