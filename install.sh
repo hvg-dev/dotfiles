@@ -10,6 +10,11 @@ curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 ln -sn "$DOTFILES_DIR/antigenrc" "$HOME/.antigenrc"
 
+if [ -f "$HOME/.tmux.conf" ] ; then
+    rm "$HOME/.tmux.conf"
+fi
+ln -sn "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
+
 mkdir -p "$HOME/.config"
 
 ln -sn "$DOTFILES_DIR/starship.toml" "$HOME/.config/"
