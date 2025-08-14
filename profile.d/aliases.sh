@@ -1,4 +1,4 @@
 # include .aliases if it exists
 if [ -f "$HOME/.aliases" ] ; then
-    . "$HOME/.aliases"
+    source "$HOME/.aliases"
 fi
